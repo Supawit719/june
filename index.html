@@ -9,7 +9,10 @@
     body {
         margin: 0;
         height: 100vh;
-        background: linear-gradient(135deg, #dff4ff, #cfefff);
+        background-image: url("https://images.unsplash.com/photo-1503264116251-35a269479413");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -18,57 +21,32 @@
         position: relative;
     }
 
-    /* overlay แสงฟ้าพาสเทล */
+    /* overlay ฟ้าพาสเทล */
     .overlay {
         position: absolute;
         inset: 0;
-        background: radial-gradient(circle at center,
-            rgba(200,230,255,0.9),
-            rgba(200,230,255,0.6),
-            rgba(200,230,255,0.3));
+        background: rgba(200,230,255,0.75);
+        backdrop-filter: blur(2px);
         z-index: 0;
     }
 
-    .layout {
+    /* กล่องหลัก */
+    .wrapper {
         position: relative;
         z-index: 1;
-        display: flex;
-        gap: 30px;
-        align-items: center;
-    }
-
-    /* ===== ประวัติ ===== */
-    .history-box {
-        width: 220px;
-        height: 260px;
-        border: 2px solid rgba(140,180,255,0.8);
-        border-radius: 10px;
-        padding: 10px;
-        background: rgba(255,255,255,0.7);
-        box-shadow: 0 0 15px rgba(120,170,255,0.4);
-        overflow-y: auto;
-        font-size: 14px;
-    }
-
-    .history-box h3 {
-        margin: 0 0 6px;
+        background: rgba(255,255,255,0.65);
+        border-radius: 18px;
+        padding: 30px 40px 25px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         text-align: center;
-        font-size: 15px;
-        color: #3a5ba0;
     }
 
     /* ===== กระดิ่ง ===== */
-    .game {
-        text-align: center;
-    }
-
-    /* ตัวครอบรูป (ไม่กำหนดขนาดตายตัว) */
     .bell-wrapper {
         display: inline-block;
-        transition: filter 0.3s ease;
+        margin-bottom: 10px;
     }
 
-    /* แสงม่วงตามรูป */
     .active-glow {
         filter:
             drop-shadow(0 0 12px rgba(180,0,255,0.7))
@@ -102,7 +80,7 @@
     }
 
     .bell {
-        width: 90px; /* ← เปลี่ยนขนาดรูปได้ แสงจะปรับตาม */
+        width: 90px;
         cursor: pointer;
         animation: swing 1.3s infinite ease-in-out;
         user-select: none;
@@ -119,8 +97,8 @@
     }
 
     .info {
-        margin-top: 8px;
         font-size: 18px;
+        margin-top: 8px;
     }
 
     button {
@@ -132,30 +110,51 @@
         color: #fff;
         cursor: pointer;
     }
+
+    /* ===== ประวัติด้านล่าง ===== */
+    .history-box {
+        margin-top: 18px;
+        width: 100%;
+        max-width: 320px;
+        border: 2px solid rgba(140,180,255,0.8);
+        border-radius: 12px;
+        padding: 10px;
+        background: rgba(255,255,255,0.85);
+        box-shadow: 0 0 15px rgba(120,170,255,0.4);
+        font-size: 14px;
+        text-align: left;
+        max-height: 140px;
+        overflow-y: auto;
+    }
+
+    .history-box h3 {
+        margin: 0 0 6px;
+        text-align: center;
+        font-size: 15px;
+        color: #3a5ba0;
+    }
 </style>
 </head>
 <body>
 
 <div class="overlay"></div>
 
-<div class="layout">
+<div class="wrapper">
+
+    <!-- กระดิ่ง -->
+    <div class="bell-wrapper active-glow" id="glow">
+        <img
+            src="image/กระดิ่ง-removebg-preview.png"
+            class="bell"
+            id="bell">
+    </div>
+
+    <div class="info">⏱ เวลา: <span id="time">0.000</span> วินาที</div>
+    <button id="reset">🔄 รีเซ็ต</button>
 
     <!-- ประวัติ -->
     <div class="history-box" id="history">
         <h3>📜 ประวัติเวลา</h3>
-    </div>
-
-    <!-- เกม -->
-    <div class="game">
-        <div class="bell-wrapper active-glow" id="glow">
-            <img
-                src="image/กระดิ่ง-removebg-preview.png"
-                class="bell"
-                id="bell">
-        </div>
-
-        <div class="info">⏱ เวลา: <span id="time">0.000</span> วินาที</div>
-        <button id="reset">🔄 รีเซ็ต</button>
     </div>
 
 </div>
